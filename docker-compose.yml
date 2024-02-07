@@ -1,0 +1,75 @@
+version: "3.7"
+
+services:
+  authentication-api:
+    depends_on:
+      - database
+    env_file: auth/config/development.env
+    container_name: lab-server-api
+    build:
+      context: auth
+    ports:
+      - "3001:3001"
+    command: yarn start:dev
+    networks:
+      - bridge-network
+
+  tennis-player-api:
+    depends_on:
+      - database
+    env_file: tennis-players-api/config/development.env
+    container_name: tennis-player-server-api
+    build:
+      context: tennis-players-api
+    ports:
+      - "3002:3002"
+    command: yarn start:dev
+    networks:
+      - bridge-network
+
+#  points-service:
+#    depends_on:
+#      - tennis-player-api
+#    container_name: points-service
+#    build:
+#      context: points-service
+#    ports:
+#      - "3003:3003"
+#    command: yarn start:dev
+#    networks:
+#      - bridge-network
+
+  api-gateway:
+    depends_on:
+      - authentication-api
+      - tennis-player-api
+    env_file: api-gateway/config/development.env
+    container_name: api-gateway
+    build:
+      context: api-gateway
+    ports:
+      - "8000:8000"
+    command: yarn start:dev
+    networks:
+      - bridge-network
+
+  database:
+    container_name: lab-soa-postgres
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: soa_db
+    networks:
+      - socket-network
+      - bridge-network
+
+networks:
+  socket-network:
+  bridge-network:
+    driver: bridge
+volumes:
+  socket-pgdata:
