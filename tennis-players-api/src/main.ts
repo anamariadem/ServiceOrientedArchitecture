@@ -41,7 +41,7 @@ async function bootstrap() {
 
   app.useWebSocketAdapter(new SocketAdapter(app));
 
-  await app.listen(port, async () => {
+  await app.listen(port, "127.0.0.1", async () => {
     console.log(`Your Application is running on: ${await app.getUrl()}`);
   });
 }

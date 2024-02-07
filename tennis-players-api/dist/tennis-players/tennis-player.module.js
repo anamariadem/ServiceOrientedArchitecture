@@ -12,28 +12,12 @@ const typeorm_1 = require("@nestjs/typeorm");
 const tennis_player_entity_1 = require("./entities/tennis-player.entity");
 const tennis_player_service_1 = require("./tennis-player.service");
 const tennis_player_controller_1 = require("./tennis-player.controller");
-const microservices_1 = require("@nestjs/microservices");
 let TennisPlayerModule = class TennisPlayerModule {
 };
 TennisPlayerModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forFeature([tennis_player_entity_1.TennisPlayer]),
-            microservices_1.ClientsModule.register([
-                {
-                    name: "POINTS_SERVICE",
-                    transport: microservices_1.Transport.KAFKA,
-                    options: {
-                        client: {
-                            clientId: "points",
-                            brokers: ["0.0.0.0:9092"],
-                        },
-                        consumer: {
-                            groupId: "points-consumer",
-                        },
-                    },
-                },
-            ]),
         ],
         controllers: [tennis_player_controller_1.TennisPlayerController],
         providers: [tennis_player_service_1.TennisPlayerService],

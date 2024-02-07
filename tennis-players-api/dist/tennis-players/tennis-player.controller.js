@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TennisPlayerController = void 0;
 const tennis_player_service_1 = require("./tennis-player.service");
@@ -24,9 +21,6 @@ let TennisPlayerController = class TennisPlayerController {
     findAll() {
         return this.tennisPlayerService.getAll();
     }
-    updatePoints(updatePointsDto) {
-        this.tennisPlayerService.updatePoints(updatePointsDto);
-    }
 };
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
@@ -35,13 +29,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TennisPlayerController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Patch)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], TennisPlayerController.prototype, "updatePoints", null);
 TennisPlayerController = __decorate([
     (0, swagger_1.ApiTags)("TennisPlayer"),
     (0, common_1.Controller)("tennis-player"),

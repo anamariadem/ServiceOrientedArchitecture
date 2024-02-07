@@ -18,6 +18,8 @@ const configuration_1 = require("./public/configuration");
 const tennis_player_entity_1 = require("./tennis-players/entities/tennis-player.entity");
 const tennis_player_module_1 = require("./tennis-players/tennis-player.module");
 const auth_module_1 = require("./auth/auth.module");
+const websocket_events_module_1 = require("./websocket-events/websocket-events.module");
+const event_emitter_1 = require("@nestjs/event-emitter");
 const ENTITIES = [tennis_player_entity_1.TennisPlayer];
 let AppModule = class AppModule {
 };
@@ -52,6 +54,10 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             health_module_1.HealthModule,
             tennis_player_module_1.TennisPlayerModule,
+            websocket_events_module_1.WebsocketEventsModule,
+            event_emitter_1.EventEmitterModule.forRoot({
+                maxListeners: 100,
+            }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

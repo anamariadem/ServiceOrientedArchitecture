@@ -4,8 +4,4 @@ export declare class TennisPlayerController {
     private readonly tennisPlayerService;
     constructor(tennisPlayerService: TennisPlayerService);
     findAll(): Promise<TennisPlayer[]>;
-    updatePoints(updatePointsDto: {
-        playerId: string;
-        points: number;
-    }): void;
 }

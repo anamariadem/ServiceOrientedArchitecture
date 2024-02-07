@@ -18,7 +18,7 @@ export class SocketAdapter extends IoAdapter {
     return super.createIOServer(port, {
       ...options,
       cors: {
-        origin: "*",
+        origin: ["http://127.0.0.1:3000", "http://localhost:3000/"],
         methods: ["GET", "POST"],
         // credentials: true,
       },

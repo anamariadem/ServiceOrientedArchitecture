@@ -35,15 +35,23 @@ export const App = ({user, token}) => {
     };
 
     useEffect(() => {
-        const socket = io('http://localhost:3002');
-
+        const socket = io('http://127.0.0.1:3002', {
+            autoConnect: true,
+            transports: ['websocket', 'polling'],
+        });
+        console.log('HERE ---- >')
         socket.on('connect', () => {
             console.log('Socket connected');
         });
 
         socket.on('connect_error', () => {
+            console.log('HERE ---- >')
             console.log('Socket not connected');
         });
+
+        // socket.on('welcome', message => {
+        //     console.log('message ------------------->> ', message);
+        // })
 
         (async () => {
             let res = await fetchBooks();

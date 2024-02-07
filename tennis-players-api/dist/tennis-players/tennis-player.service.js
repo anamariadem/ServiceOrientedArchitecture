@@ -17,25 +17,18 @@ const tennis_player_entity_1 = require("./entities/tennis-player.entity");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const microservices_1 = require("@nestjs/microservices");
 let TennisPlayerService = class TennisPlayerService {
-    constructor(tennisPlayerRepository, pointsClient) {
+    constructor(tennisPlayerRepository) {
         this.tennisPlayerRepository = tennisPlayerRepository;
-        this.pointsClient = pointsClient;
     }
     getAll() {
         return this.tennisPlayerRepository.find();
-    }
-    updatePoints(updatePointsDto) {
-        this.pointsClient.emit("points_update", updatePointsDto);
     }
 };
 TennisPlayerService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(tennis_player_entity_1.TennisPlayer)),
-    __param(1, (0, common_1.Inject)("POINTS_SERVICE")),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        microservices_1.ClientKafka])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], TennisPlayerService);
 exports.TennisPlayerService = TennisPlayerService;
 //# sourceMappingURL=tennis-player.service.js.map

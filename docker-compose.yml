@@ -26,6 +26,7 @@ services:
     command: yarn start:dev
     networks:
       - bridge-network
+      - socket-network
 
 #  points-service:
 #    depends_on:

@@ -30,6 +30,7 @@ export class WebsocketEventsGateway
     console.log("<< ----- handleConnection ----- >>");
     // client.emit("serverDeployed", { event: "serverDeployed", data: {} });
     this.wsClients.push(client);
+    this.broadcast("welcome", "Welcome to the app!", client);
   }
 
   handleDisconnect(client) {
